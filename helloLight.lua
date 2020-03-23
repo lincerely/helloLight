@@ -50,7 +50,7 @@ function TIC()
 	if btn(4) then gi=gi+1 end
 	if btn(5) and gi>1 then gi=gi-1 end
 
-	cls(13)
+	cls(0)
 	spr(1+t%60//30*2,x,y,14,3,0,0,2,2)
 	print("HELLO WORLD!",84,70)
 	t=t+1
@@ -77,7 +77,8 @@ function drawWater()
 	local addrW = (136 - waterY) * 120 
 	local addrR = (136 - waterY - 1) * 120
 	for yOffset=1,waterY do
-		memcpy(addrW, addrR, 120)
+		-- -1, 0, 1, 0, -1, 0, 1
+		memcpy(addrW, addrR + (yOffset+t//10)%2 - 1, 120)
 		addrW=addrW+120
 		addrR=addrR-120
 	end
